@@ -74,8 +74,39 @@ function Main(){
       <div className='mb-10'>
         <img src='https://webinar.gg/loginLogo.svg' alt='logo of webinar.gg' className='block m-auto w-xs'/>
       </div>
-      <Screen1></Screen1>
+      {/* <Screen1></Screen1> */}
+      {/* <br/> */}
+      <Screen2></Screen2>
     </div>
   )
 }
+function Screen2(){
+  const [clicked, setClicked] = useState(false);
+  const inputElement = useRef();
+  function buttonClicked(){
+    if(!inputElement.current.value){
+      alert('💡Email is required.');
+    }
+    else if (/^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z0-9.-]+\.com$/
+.test(inputElement.current.value)) {
+      alert('Email accepted: ' + inputElement.current.value);
+      setClicked(prev=>true);
+      setTimeout(() => {
+          inputElement.current.value = ""
+          setClicked(prev=>false);
+        }, 1000);
+    } 
+    else{
+      alert('💡Email must be from john@gmail.com domain.');
+    }
+  }
+  return(
+    <div>
+      <div className='text-white font-medium text-3xl mt-10 mb-10'><h1>Let's Get Started</h1></div>
+      <div><input ref={inputElement} type='email' pattern=".+@example\.com" size="30" placeholder='Email Id' className='text-md bg-input text-white border-border border-solid border-[1px] rounded-md p-1 mb-5 w-full focus:outline-none'/></div>
+      <div><button className={`p-2 pl-5 pr-5 w-full font-medium rounded-lg ${clicked?'text-blue-900 bg-cyan-200': 'text-white bg-gray-400'}`} onClick={buttonClicked}>Continue</button></div>
+    </div>
+  )
+}
+
 export default App
