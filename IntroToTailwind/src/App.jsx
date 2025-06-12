@@ -16,7 +16,7 @@ function Test(){
       <div style={{padding: '5px', borderRadius: '2px',color: 'white',backgroundColor: 'red'}}>Hi there from <b>second</b> div</div>
       <div style={{padding: '5px', borderRadius: '2px',color: 'black',backgroundColor: 'pink'}}>Hi there from <b>third</b> div</div>
     </div> */}
-    <div className='flex justify-around'>
+    <div className='flex justify-around flex-wrap'>
       <div className='p-3 text-yellow-300 bg-green-600 rounded-xl'>Hi there from <b>first</b> div</div>
       <div className='p-3 text-white bg-red-600 rounded-xl'>Hi there from <b>second</b> div</div>
       <div className='p-3 text-black bg-pink-200 rounded-xl'>Hi there from <b>third</b> div</div>
@@ -28,6 +28,9 @@ function Test(){
       <div className='col-span-5 rounded-2xl p-1 bg-red-200'>Hi there from <b>second</b> grid</div>
       <div className='col-span-2 rounded-2xl p-1 bg-yellow-200'>Hi there from <b>third</b> div</div>
     </div>
+    <br />
+    {/* Responsiveness and Mobile first tailwind classes */}
+    <div className='md:bg-green-300 sm:bg-blue-400 bg-red-500 p-5 m-2 rounded-2xl text-center font-bold'>Hey There, Welcome!</div>
     </>
   )
 }
