@@ -2,4 +2,8 @@
 @theme{
     --breakpoint-md: 48rem;
     --color-red-500: #D2042D;
+    --color-screen: rgb(0, 43, 92);
+    --color-card: rgba(255,255,255,0.1);
+    --color-input: rgba(255, 255, 255, 0.05);
+    --color-border: rgba(255, 255, 255, 0.3)
 }

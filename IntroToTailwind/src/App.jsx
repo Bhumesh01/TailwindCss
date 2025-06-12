@@ -1,11 +1,13 @@
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 
 function App() {
   return (
-    <>
-    <div className='text-2xl text-center font-bold text-red-500'>WELCOME BACK!</div>
-    <Test></Test>
-    </>
+    <div className='h-screen flex flex-col items-center justify-center text-center bg-screen'>
+    {/* <div className='text-2xl text-center font-bold text-red-500'>WELCOME BACK!</div>
+    <Test></Test> */}
+    <Main></Main>
+    </div>
   )
 }
 function Test(){
@@ -40,6 +42,40 @@ function Test(){
       <div className='col-span-12 sm:col-span-2 rounded-2xl p-1 bg-[#fdba74]'>Hi there from <b>third</b> div</div>
     </div>
     </>
+  )
+}
+function Screen1(){
+  const [clicked, setClicked] = useState(false);
+  const inputElement = useRef();
+  function buttonClicked(){
+    if(inputElement.current.value){
+      setClicked(prev=>true);
+      setTimeout(() => {
+          inputElement.current.value = ""
+          setClicked(prev=>false);
+        }, 1000);
+    }
+    else{
+      alert('Please Enter the age')
+    }
+  }
+  return(
+    <div>
+      <div className='text-white font-medium text-3xl mt-10 mb-10'><h1>Verify Your age</h1></div>
+      <div className='text-gray-300 mb-5'>Please Confirm your birth year. This data will not be stored</div>
+      <div><input ref={inputElement} type='text' placeholder='Your Birth year' className='text-md bg-input text-white border-border border-solid border-[1px] rounded-md p-1 mb-5 w-full focus:outline-none'/></div>
+      <div><button className={`p-2 pl-5 pr-5 w-full font-medium rounded-lg ${clicked?'text-blue-900 bg-cyan-200': 'text-white bg-gray-400'}`} onClick={buttonClicked}>Continue</button></div>
+    </div>
+  )
+}
+function Main(){
+  return(
+    <div className='bg-card p-5 rounded-xl w-[90%] sm:w-[70%] md:w-[50%] min-w-[160px] max-w-[470px]'>
+      <div className='mb-10'>
+        <img src='https://webinar.gg/loginLogo.svg' alt='logo of webinar.gg' className='block m-auto w-xs'/>
+      </div>
+      <Screen1></Screen1>
+    </div>
   )
 }
 export default App
