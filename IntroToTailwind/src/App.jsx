@@ -44,15 +44,34 @@ function Test(){
     </>
   )
 }
-function Screen1(){
+function Main(){
+  const [visibility1, setVisibility1] = useState(true);
+  const [visibility2, setVisibility2] = useState(false);
+  const [visibility3, setVisibility3] = useState(false);
+  return(
+    <div className='bg-card p-5 rounded-xl w-[90%] sm:w-[70%] md:w-[50%] min-w-[160px] max-w-[470px]'>
+      <div className='mb-10'>
+        <img src='.\src\assets\loginLogo.svg' alt='logo of webinar.gg' className='block m-auto w-xs'/>
+      </div>
+      {visibility1&&<Screen1 setVisibility1={setVisibility1} setVisibility2={setVisibility2}></Screen1>}
+      <br/>
+      {visibility2&&<Screen2 setVisibility2={setVisibility2} setVisibility3={setVisibility3}></Screen2>}
+      <br />
+      {visibility3&&<Screen3></Screen3>}
+    </div>
+  )
+}
+function Screen1(props){
   const [clicked, setClicked] = useState(false);
+  const setVisibility1 = props.setVisibility1;
+  const setVisibility2 = props.setVisibility2;
   const inputElement = useRef();
   function buttonClicked(){
     if(inputElement.current.value){
       setClicked(prev=>true);
       setTimeout(() => {
-          inputElement.current.value = ""
-          setClicked(prev=>false);
+          setVisibility1(prev=>false);
+          setVisibility2(prev=>true);
         }, 1000);
     }
     else{
@@ -68,33 +87,21 @@ function Screen1(){
     </div>
   )
 }
-function Main(){
-  return(
-    <div className='bg-card p-5 rounded-xl w-[90%] sm:w-[70%] md:w-[50%] min-w-[160px] max-w-[470px]'>
-      <div className='mb-10'>
-        <img src='https://webinar.gg/loginLogo.svg' alt='logo of webinar.gg' className='block m-auto w-xs'/>
-      </div>
-      {/* <Screen1></Screen1> */}
-      {/* <br/> */}
-      {/* <Screen2></Screen2> */}
-      <Screen3></Screen3>
-    </div>
-  )
-}
-function Screen2(){
+function Screen2(props){
   const [clicked, setClicked] = useState(false);
+   const setVisibility2 = props.setVisibility2;
+  const setVisibility3 = props.setVisibility3;
   const inputElement = useRef();
   function buttonClicked(){
     if(!inputElement.current.value){
       alert('💡Email is required.');
     }
-    else if (/^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z0-9.-]+\.com$/
-.test(inputElement.current.value)) {
+    else if (/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(inputElement.current.value)) {
       alert('Email accepted: ' + inputElement.current.value);
       setClicked(prev=>true);
       setTimeout(() => {
-          inputElement.current.value = ""
-          setClicked(prev=>false);
+          setVisibility2(prev=>false);
+          setVisibility3(prev=>true);
         }, 1000);
     } 
     else{
@@ -127,9 +134,10 @@ function Screen3(){
     inputElement1.current.focus();
   },[])
   function buttonClicked(){
-    if(inputElement1.current.value&&inputElement2.current.value&&inputElement2.current.value&&inputElement3.current.value&&inputElement4.current.value&&inputElement5.current.value&&inputElement6.current.value){
+    if(inputElement1.current.value&&inputElement2.current.value&&inputElement3.current.value&&inputElement4.current.value&&inputElement5.current.value&&inputElement6.current.value){
       setClicked(prev=>true);
       setTimeout(() => {
+          alert('Successfully Logged In');
           inputElement1.current.value = "";
           inputElement2.current.value = "";
           inputElement3.current.value = "";
