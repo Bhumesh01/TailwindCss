@@ -76,7 +76,8 @@ function Main(){
       </div>
       {/* <Screen1></Screen1> */}
       {/* <br/> */}
-      <Screen2></Screen2>
+      {/* <Screen2></Screen2> */}
+      <Screen3></Screen3>
     </div>
   )
 }
@@ -108,5 +109,55 @@ function Screen2(){
     </div>
   )
 }
-
+function Screen3(){
+  const [clicked, setClicked] = useState(false);
+  const inputElement1 = useRef();
+  const inputElement2 = useRef();
+  const inputElement3 = useRef();
+  const inputElement4 = useRef();
+  const inputElement5 = useRef();
+  const inputElement6 = useRef();
+  const code = [inputElement1, inputElement2, inputElement3, inputElement4, inputElement5, inputElement6]
+  function otp(e,index){
+    if(e.target.value && index !== code.length-1){
+      code[index + 1].current.focus();
+    }
+  }
+  useEffect(()=>{
+    inputElement1.current.focus();
+  },[])
+  function buttonClicked(){
+    if(inputElement1.current.value&&inputElement2.current.value&&inputElement2.current.value&&inputElement3.current.value&&inputElement4.current.value&&inputElement5.current.value&&inputElement6.current.value){
+      setClicked(prev=>true);
+      setTimeout(() => {
+          inputElement1.current.value = "";
+          inputElement2.current.value = "";
+          inputElement3.current.value = "";
+          inputElement4.current.value = "";
+          inputElement5.current.value = "";
+          inputElement6.current.value = "";
+          setClicked(prev=>false);
+        }, 1000);
+    }
+    else{
+      alert('Please Enter the age')
+    }
+  }
+  return(
+    <div>
+      <div className='text-white font-medium text-3xl mt-10 mb-10'><h1>Check Your Email For A Code</h1></div>
+      <div className='text-gray-300 mb-5'>Please enter the verification code sent to your email id</div>
+      <div className='grid grid-cols-6 gap-2.5 ml-[15%] mr-[15%]'>
+        <input onChange={(e)=>otp(e,0)} ref={inputElement1} type='text' maxLength={'1'}  className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5 pb-5 mb-5 col-span-1 focus:outline-none'/>
+        <input onChange={(e)=>otp(e,1)} ref={inputElement2} type='text' maxLength={'1'} className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5  pb-5  mb-5 col-span-1 focus:outline-none'/>
+        <input onChange={(e)=>otp(e,2)} ref={inputElement3} type='text' maxLength={'1'} className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5  pb-5  mb-5 col-span-1 focus:outline-none'/>
+        <input onChange={(e)=>otp(e,3)} ref={inputElement4} type='text' maxLength={'1'} className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5  pb-5  mb-5 col-span-1 focus:outline-none'/>
+        <input onChange={(e)=>otp(e,4)} ref={inputElement5} type='text' maxLength={'1'} className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5  pb-5  mb-5 col-span-1 focus:outline-none'/>
+        <input onChange={(e)=>otp(e,5)} ref={inputElement6} type='text' maxLength={'1'} className='text-md bg-input text-white border-border border-solid border-[1px] rounded-2xl text-center pt-5  pb-5  mb-5 col-span-1 focus:outline-none'/>
+        </div>
+      <div><button className={`p-2 pl-5 pr-5 w-full font-medium rounded-lg ${clicked?'text-blue-900 bg-cyan-200': 'text-white bg-gray-400'}`} onClick={buttonClicked}>Verify</button></div>
+      <div className='text-gray-300 mb-5'>Can't find the email? click <a href='./' className='text-white font-bold underline'>here</a> to resend</div>
+    </div>
+  )
+}
 export default App
