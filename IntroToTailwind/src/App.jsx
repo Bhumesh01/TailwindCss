@@ -3,6 +3,7 @@ import './App.css'
 function App() {
   return (
     <>
+    <div className='text-2xl text-center font-bold text-red-500'>WELCOME BACK!</div>
     <Test></Test>
     </>
   )
@@ -28,9 +29,16 @@ function Test(){
       <div className='col-span-5 rounded-2xl p-1 bg-red-200'>Hi there from <b>second</b> grid</div>
       <div className='col-span-2 rounded-2xl p-1 bg-yellow-200'>Hi there from <b>third</b> div</div>
     </div>
-    <br />
+    <br/>
     {/* Responsiveness and Mobile first tailwind classes */}
     <div className='md:bg-green-300 sm:bg-blue-400 bg-red-500 p-5 m-2 rounded-2xl text-center font-bold'>Hey There, Welcome!</div>
+    <br/>
+    {/* Use Case 1 */}
+    <div className='grid grid-cols-12'>
+      <div className='col-span-12 sm:col-span-5 rounded-2xl p-1 bg-blue-600 text-white'>Hi there from <b>first</b> div</div>
+      <div className='col-span-12 sm:col-span-5 rounded-2xl p-1 bg-purple-500'>Hi there from <b>second</b> grid</div>
+      <div className='col-span-12 sm:col-span-2 rounded-2xl p-1 bg-[#fdba74]'>Hi there from <b>third</b> div</div>
+    </div>
     </>
   )
 }
