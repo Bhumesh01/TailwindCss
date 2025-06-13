@@ -1,7 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+
+// Custom Hook for Media Query
+const useMediaQuery = (query)=>{
+  const [matches, setMatches] = useState(false);
+  useEffect(()=>{
+    const media = window.matchMedia(query);
+    if(media.matches !== matches){
+      setMatches(media.matches);
+    }
+    const Listener = ()=> setMatches(media.matches);
+    media.addListener(Listener);
+    return()=>media.removeListener(Listener);
+  },[matches, query]);
+  return matches;
+};
+
 function App() {
   const[sidebarOpen, setSidebarOpen] = useState(true);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  useEffect(()=>{
+    if(isDesktop == false){
+      setSidebarOpen(false);
+    }
+    else{
+      setSidebarOpen(true);
+    }
+  }, [isDesktop]);
   return (
     <>
       <div className='h-screen bg-white text-black dark:bg-black'>
@@ -30,9 +55,9 @@ function Sidebar(props){
   const sidebarOpen = props.sidebarOpen;
   const setSidebarOpen = props.setSidebarOpen;
   return(
-    <div className={`h-screen ${sidebarOpen?'w-64':'w-16'} bg-red-100 sm:block hidden`}>
+    <div className={`h-screen ${sidebarOpen?'w-64':'w-16'} bg-red-100`}>
       {sidebarOpen?
-      <div>
+      <div className='fixed top-0 left-0 md:relative'>
         <button className='transition-all duration-300 ease-in-out
  hover:bg-pink-300 cursor-pointer text-2xl border border-pink-500 p-2 block rounded-xl' onClick={()=>{setSidebarOpen(prev=>!prev)}}>☰</button>
         <div className='grid grid-rows-5 gap-5'>
@@ -43,8 +68,8 @@ function Sidebar(props){
           <h1>MY PURCHASES</h1>
         </div>
         </div>: 
-        <button className='transition-all duration-300 ease-in-out
- hover:bg-pink-300 cursor-pointer text-3xl border border-pink-500 p-2 block rounded-xl' onClick={()=>{setSidebarOpen(prev=>!prev)}}>☰</button>}
+        <div className='fixed top-0 left-0'><button className='transition-all duration-300 ease-in-out
+ hover:bg-pink-300 cursor-pointer text-3xl border border-pink-500 p-2 block rounded-xl' onClick={()=>{setSidebarOpen(prev=>!prev)}}>☰</button></div>}
     </div>
   )
 }
