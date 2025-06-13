@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <div className='h-screen bg-white text-black dark:bg-black dark:text-white'>
-        <h1>Toggle Theme</h1>
+        <button className='border border-black dark:border-white' onClick={()=>{document.querySelector('html').classList.toggle("dark", document.querySelector("html").classList[0]=="dark"?false:true)}}>Toggle Theme</button>
         {/* <SidebarClass1></SidebarClass1> */}
       </div>
     </>
